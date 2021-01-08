@@ -50,7 +50,7 @@ public class faceDetails : MonoBehaviour
             GameObject.Find("detailsLabel").GetComponent<TextMeshProUGUI>().text = s;
         }
     }
-    public void writeMeshData()
+    public void writeMeshData() //This method writes the mesh data to .txt files
     {
         //for vertices
 
@@ -82,9 +82,9 @@ public class faceDetails : MonoBehaviour
         }
         sr.Close();
     }
-    public void drawFaceOnTex()
+    public void drawFaceOnTex() //This is where magic happens
     {
-        if (this.GetComponent<ARFaceMeshVisualizer>().mesh.vertexCount > 0 && !isDoFile)
+        if (this.GetComponent<ARFaceMeshVisualizer>().mesh.vertexCount > 0 && !isDoFile) //This block converts the world space of face mesh to screen points
         {
             s = "Face Found";
             GameObject.Find("detailsLabel").GetComponent<TextMeshProUGUI>().text = s;
@@ -124,7 +124,9 @@ public class faceDetails : MonoBehaviour
         GameObject.Find("detailsLabel").GetComponent<TextMeshProUGUI>().text = s;
         Color color;
         Vector2 scale = new Vector2(texSize,texSize);
-
+        
+        //This block converts takes a triangle of the face mesh and rasterizes the face of user to texture
+        
         for (int i = 0; i < faceMesh.triangles.Length; i = i + 3)
         {            
             //for facetexture
@@ -190,7 +192,6 @@ public class faceDetails : MonoBehaviour
         s = "Face data is saved.";
         GameObject.Find("detailsLabel").GetComponent<TextMeshProUGUI>().text = s;
         writeMeshData();
-        SceneManager.LoadScene("FaceDisplay", LoadSceneMode.Single);
     }
     public float getDistance(Vector2 p1, Vector2 p2)
     {
